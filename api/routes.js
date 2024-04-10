@@ -1,5 +1,7 @@
 const path = require('path');
 
+const CvsController = require('../api/controllers/CvsController')
+
 const express = require('express');
 
 const router = express.Router();
@@ -8,7 +10,7 @@ router.post('/cv/add', null);
 
 router.get('/cv/:id', null);
 
-router.get('/user/:userId/cvs', null);
+router.get('/user/:userId/cvs', CvsController.getCVSByUser);
 
 router.put('/cv/:id/edit', null);
 

@@ -1,54 +1,25 @@
-const { Model, DataTypes } = require('sequelize');
+const Sequelize = require('sequelize');
+
 const sequelize = require('./database');
 
-
-class Cv extends Model {}
-
-
-Cv.init({
+const CV = sequelize.define('cv', {
   id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
   },
-  inputFile: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  outputFile: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  photoFile: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  city: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  country: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  mobilePhone: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  github: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+  inputFile: Sequelize.STRING,
+  outputFile: Sequelize.STRING,
+  photoFile: Sequelize.STRING,
+  name: Sequelize.STRING,
+  city: Sequelize.STRING,
+  country: Sequelize.STRING,
+  mobilePhone: Sequelize.STRING,
+  email: Sequelize.STRING,
+  github: Sequelize.STRING,
   experiences: { 
-    type: DataTypes.STRING, 
+    type: Sequelize.STRING, 
     get: function() {
         return JSON.parse(this.getDataValue('experiences'));
     }, 
@@ -57,7 +28,7 @@ Cv.init({
     }
   },
   educations: { 
-    type: DataTypes.STRING, 
+    type: Sequelize.STRING, 
     get: function() {
         return JSON.parse(this.getDataValue('educations'));
     }, 
@@ -66,7 +37,7 @@ Cv.init({
     }
   },
   skills: { 
-    type: DataTypes.STRING, 
+    type: Sequelize.STRING, 
     get: function() {
         return JSON.parse(this.getDataValue('skills'));
     }, 
@@ -75,7 +46,7 @@ Cv.init({
     }
   },
   languages: { 
-    type: DataTypes.STRING, 
+    type: Sequelize.STRING, 
     get: function() {
         return JSON.parse(this.getDataValue('languages'));
     }, 
@@ -84,7 +55,7 @@ Cv.init({
     }
   },
   certificates: { 
-    type: DataTypes.STRING, 
+    type: Sequelize.STRING, 
     get: function() {
         return JSON.parse(this.getDataValue('certificates'));
     }, 
@@ -92,12 +63,7 @@ Cv.init({
         return this.setDataValue('certificates', JSON.stringify(val));
     }
   }
-}, {
-  sequelize,
-  modelName: 'Cv',
-  tableName: 'cvs',
-  timestamps: false
 });
 
 
-module.exports = Cv        
+module.exports = CV        
