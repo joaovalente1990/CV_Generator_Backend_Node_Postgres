@@ -14,13 +14,13 @@ const User = sequelize.define('user', {
     email: Sequelize.STRING,
     username: Sequelize.STRING,
     hashedPassword: Sequelize.STRING,
-    cvs: {
-        type: Sequelize.STRING, 
-        get: function() {
-            return JSON.parse(this.getDataValue('cvs'));
-        }, 
-        set: function(val) {
-            return this.setDataValue('cvs', JSON.stringify(val));
+},
+{
+    classMethods: {
+        associate: (models) => {
+        User.hasMany(models.CV, {
+            foreignKey: 'cvId'
+        });
         }
     }
 });

@@ -18,51 +18,33 @@ const CV = sequelize.define('cv', {
   mobilePhone: Sequelize.STRING,
   email: Sequelize.STRING,
   github: Sequelize.STRING,
-  experiences: { 
-    type: Sequelize.STRING, 
-    get: function() {
-        return JSON.parse(this.getDataValue('experiences'));
-    }, 
-    set: function(val) {
-        return this.setDataValue('experiences', JSON.stringify(val));
-    }
-  },
-  educations: { 
-    type: Sequelize.STRING, 
-    get: function() {
-        return JSON.parse(this.getDataValue('educations'));
-    }, 
-    set: function(val) {
-        return this.setDataValue('educations', JSON.stringify(val));
-    }
-  },
-  skills: { 
-    type: Sequelize.STRING, 
-    get: function() {
-        return JSON.parse(this.getDataValue('skills'));
-    }, 
-    set: function(val) {
-        return this.setDataValue('skills', JSON.stringify(val));
-    }
-  },
-  languages: { 
-    type: Sequelize.STRING, 
-    get: function() {
-        return JSON.parse(this.getDataValue('languages'));
-    }, 
-    set: function(val) {
-        return this.setDataValue('languages', JSON.stringify(val));
-    }
-  },
-  certificates: { 
-    type: Sequelize.STRING, 
-    get: function() {
-        return JSON.parse(this.getDataValue('certificates'));
-    }, 
-    set: function(val) {
-        return this.setDataValue('certificates', JSON.stringify(val));
-    }
+  
+  classMethods: {
+      associate: (models) => {
+
+        CV.hasMany(models.Experience, {
+            foreignKey: 'experienceId'
+        });
+
+        CV.hasMany(models.Education, {
+            foreignKey: 'educationId'
+        });
+
+        CV.hasMany(models.Skill, {
+          foreignKey: 'skillId'
+        });
+
+        CV.hasMany(models.Language, {
+          foreignKey: 'languageId'
+        });
+
+        CV.hasMany(models.Certificate, {
+          foreignKey: 'certificateId'
+        });
+
+      }
   }
+
 });
 
 
