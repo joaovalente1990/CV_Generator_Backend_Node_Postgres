@@ -4,7 +4,7 @@ exports.getCVSByUser = (req, res, next) => {
 
     User.findById(userId)
       .then(user => {
-        return user.cvs.get();
+        return user.getCVs();
       })
       .catch(err => console.log(err));
   };
